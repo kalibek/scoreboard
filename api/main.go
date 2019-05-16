@@ -9,16 +9,12 @@ import (
 	"github.com/kalibek/scoreboard/pkg/wscontext"
 	"log"
 	"net/http"
-	"os"
 	"time"
 )
 
 func main() {
-	dbFileName := os.Getenv("DB_FILE")
-	if dbFileName == "" {
-		dbFileName = "game.db"
-	}
-	db, err := bolt.Open(dbFileName, 0600, nil)
+
+	db, err := bolt.Open("game.db", 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
