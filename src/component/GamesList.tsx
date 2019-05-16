@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Game } from './model';
+import { Game } from '../model';
 import { List, ListItem } from '@material-ui/core';
-import { calculateScores } from './utils';
+import { calculateScores } from '../service';
 
 interface State {
   games: Game[]

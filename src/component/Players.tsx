@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Player } from './model';
+import { Player } from '../model';
 import { Button, List, ListItem, TextField, Typography } from '@material-ui/core';
-import { styles } from './styles';
+import { styles } from '../styles';
 
 interface Props {
   readonly: boolean;

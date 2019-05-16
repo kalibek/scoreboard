@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Players from './Players';
-import Scores from './Scores';
+import Players from './component/Players';
+import Scores from './component/Scores';
 import { Game, Player, Score } from './model';
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { styles } from './styles';
 import uuid from 'uuid';
-import GamesList from './GamesList';
+import GamesList from './component/GamesList';
 import moment from 'moment';
 
 class App extends Component<{}, Game> {

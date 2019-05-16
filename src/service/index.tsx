@@ -1,4 +1,4 @@
-import { Player, Score, ScoreSum } from './model';
+import { Player, Score, ScoreSum } from '../model';
 
 export const calculateScores = (players: Player[], scores: Score[]): ScoreSum[] => {
     let sums: ScoreSum[] = [];

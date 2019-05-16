@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Player, Score, ScoreSum } from './model';
+import { Player, Score } from '../model';
 import { Button, Table, TableBody, TableCell, TableFooter, TableHead, TableRow, TextField } from '@material-ui/core';
 import Timer from './Timer';
-import { styles } from './styles';
-import { calculateScores } from './utils';
+import { styles } from '../styles';
+import { calculateScores } from '../service';
 
 interface Props {
   readonly: boolean;
@@ -20,6 +20,7 @@ interface Props {
 interface State {
   word: string;
   score: number;
+  showTimer: boolean;
 }
 
 interface Move {
@@ -33,6 +34,7 @@ class Scores extends Component<Props, State> {
     this.state = {
       word: '',
       score: 0,
+      showTimer: false,
     }
   }
 
@@ -81,6 +83,10 @@ class Scores extends Component<Props, State> {
     this.props.onFinish();
   };
 
+  toggleTimer = () => {
+    this.setState(prev => ({ ...prev, showTimer: !prev.showTimer }))
+  };
+
   render() {
     const playerName = this.props.players[this.props.turn].name;
     return <div>
@@ -96,7 +102,6 @@ class Scores extends Component<Props, State> {
             <Button style={styles.button} variant="contained" color="primary" onClick={this.saveScore}>Save</Button>
             <Button style={styles.button} variant="contained" color="default" onClick={this.props.onUndo}>Undo</Button>
           </div>
-          <Timer/>
         </div>
       }
       <Table>
@@ -117,16 +122,24 @@ class Scores extends Component<Props, State> {
         <TableFooter>
           <TableRow>
             <TableCell>Total</TableCell>
-            {calculateScores(this.props.players, this.props.scores).map(s => <TableCell key={s.turn}>{s.sum}</TableCell>)}
+            {calculateScores(this.props.players, this.props.scores).map(s => <TableCell
+              key={s.turn}>{s.sum}</TableCell>)}
           </TableRow>
         </TableFooter>
       </Table>
 
       {this.props.readonly ? "" :
-        <Button style={styles.button} variant="contained" color="primary" onClick={this.finish}>
-          End Game
-        </Button>
+        <div>
+          <Button style={styles.button} variant="contained" color="primary" onClick={this.finish}>
+            End Game
+          </Button>
+          <Button style={styles.button} variant="contained" color="default" onClick={this.toggleTimer}>
+            Show Timer
+          </Button>
+        </div>
       }
+      {this.state.showTimer ? <Timer onToggle={this.toggleTimer}/> : ""}
+
     </div>;
   }
 }

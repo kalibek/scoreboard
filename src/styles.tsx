@@ -7,5 +7,24 @@ export const styles = {
   title: {
     color: "#fff",
     textDecoration: "none",
-  }
+  } as CSS.Properties,
+  modal: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100vh',
+    zIndex: 10000,
+    backgroundColor: "#fff",
+  } as CSS.Properties,
+  right: {
+    float: "right",
+  } as CSS.Properties,
+  big: {
+    marginTop: "30vh",
+    width: '100%',
+    textAlign: 'center',
+    fontWeight: "bold",
+    fontSize: "80px",
+  } as CSS.Properties
 };
