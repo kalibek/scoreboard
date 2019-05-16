@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    image: kalibek/scoreboard-web
+    ports:
+      - "80:80"
+  api:
+    image: kalibek/scoreboard-api
+    ports:
+      - "8000:8000"
