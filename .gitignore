@@ -27,3 +27,5 @@ yarn-error.log*
 
 /api/game.db
 /api/game.db.lock
+/data/game.db
+/data/game.db.lock

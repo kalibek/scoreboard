@@ -9,14 +9,20 @@ import (
 	"github.com/kalibek/scoreboard/pkg/wscontext"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
 func main() {
 
+	dbFile := os.Getenv("DB_FILE")
+	if dbFile == "" {
+		dbFile = "game.db"
+	}
+	log.Printf("openning %v", dbFile)
 	db, err := bolt.Open("game.db", 0600, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("error oppening db %v", err)
 	}
 	defer db.Close()
 

@@ -8,3 +8,7 @@ services:
     image: kalibek/scoreboard-api
     ports:
       - "8000:8000"
+    environment:
+      - DB_FILE=/opt/scoreboard/data/game.db
+    volumes:
+      - ./data:/opt/data/scoreboard
