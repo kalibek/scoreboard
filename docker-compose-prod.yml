@@ -11,4 +11,4 @@ services:
     environment:
       - DB_FILE=/opt/scoreboard/data/game.db
     volumes:
-      - ./data:/opt/data/scoreboard
+      - ./data:/opt/scoreboard/data
