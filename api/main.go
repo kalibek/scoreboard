@@ -20,7 +20,7 @@ func main() {
 		dbFile = "game.db"
 	}
 	log.Printf("openning %v", dbFile)
-	db, err := bolt.Open("game.db", 0600, nil)
+	db, err := bolt.Open(dbFile, 0600, nil)
 	if err != nil {
 		log.Fatalf("error oppening db %v", err)
 	}
