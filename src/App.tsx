@@ -25,24 +25,35 @@ class App extends Component<{}, Game> {
   }
 
   componentDidMount(): void {
-    const stateStr = localStorage.getItem("state")
+    const stateStr = localStorage.getItem("state");
     if (stateStr !== null) {
       this.setState({ ...JSON.parse(stateStr) })
     }
     const id = window.location.pathname.slice(1);
     if (id) {
-      const ws = new WebSocket(`ws://${window.location.host}/ws/stream/${id}`,);
-      ws.onmessage = e => {
-        const state = JSON.parse(e.data);
-        state.readonly = true;
-        this.setState(state);
-      };
+      this.wsConnect(id);
       fetch(`/api/game/${id}`, { method: "GET" })
         .then(res => res.json())
         .then(d => {
           d.readonly = true;
           this.setState(d)
         });
+    }
+  }
+
+  private wsConnect(id: string) {
+    const ws = new WebSocket(`ws://${window.location.host}/ws/stream/${id}`,);
+    ws.onmessage = e => {
+      const state = JSON.parse(e.data);
+      state.readonly = true;
+      this.setState(state);
+    };
+    ws.onerror = e => {
+      console.log(e);
+      ws.close()
+    };
+    ws.onclose = () => {
+      this.wsConnect(id);
     }
   }
 
