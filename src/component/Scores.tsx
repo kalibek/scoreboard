@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { Player, Score } from '../model';
-import { Button, Table, TableBody, TableCell, TableFooter, TableHead, TableRow, TextField } from '@material-ui/core';
+import {
+  Button,
+  CardActions,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TextField
+} from '@material-ui/core';
 import Timer from './Timer';
 import { styles } from '../styles';
 import { calculateScores } from '../service';
@@ -95,38 +106,43 @@ class Scores extends Component<Props, State> {
 
       {this.props.readonly ? "" :
         <div>
-          <TextField label="word" onChange={e => this.setWord(e.target.value)} value={this.state.word}/>
-          <TextField label="score" type="number" onChange={e => this.setScore(Number(e.target.value))}
+          <TextField label="word" onChange={e => this.setWord(e.target.value)} value={this.state.word}
+                     style={styles.input}/>
+          <TextField label="score" type="number"
+                     onChange={e => this.setScore(Number(e.target.value))} style={styles.input}
                      value={this.state.score}/>
-          <div>
+
+          <CardActions style={{ justifyContent: 'center', marginBottom: 50 }}>
             <Button style={styles.button} variant="contained" color="primary" onClick={this.saveScore}>Save</Button>
             <Button style={styles.button} variant="contained" color="default" onClick={this.props.onUndo}>Undo</Button>
-          </div>
+          </CardActions>
         </div>
       }
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>#</TableCell>
-            {this.props.players.map(p => <TableCell key={p.name}>{p.name}</TableCell>)}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {this.getMoves().map(m =>
-            <TableRow key={m.move}>
-              <TableCell>{m.move + 1}</TableCell>
-              {m.scores.map(s => <TableCell key={s.turn}>{s.word} - {s.score}</TableCell>)}
+      <Paper style={styles.tableRoot}>
+        <Table style={styles.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              {this.props.players.map(p => <TableCell key={p.name}>{p.name}</TableCell>)}
             </TableRow>
-          )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell>Total</TableCell>
-            {calculateScores(this.props.players, this.props.scores).map(s => <TableCell
-              key={s.turn}>{s.sum}</TableCell>)}
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {this.getMoves().map(m =>
+              <TableRow key={m.move}>
+                <TableCell>{m.move + 1}</TableCell>
+                {m.scores.map(s => <TableCell key={s.turn}>{s.word} - {s.score}</TableCell>)}
+              </TableRow>
+            )}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell>Total</TableCell>
+              {calculateScores(this.props.players, this.props.scores).map(s => <TableCell
+                key={s.turn}>{s.sum}</TableCell>)}
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </Paper>
 
       {this.props.readonly ? "" :
         <div>

@@ -2,7 +2,8 @@ import CSS from 'csstype';
 
 export const styles = {
   button: {
-    margin: "10px 10px 10px 0"
+    margin: "10px 10px 10px 0",
+    minWidth: '200px'
   } as CSS.Properties,
   title: {
     color: "#fff",
@@ -26,5 +27,14 @@ export const styles = {
     textAlign: 'center',
     fontWeight: "bold",
     fontSize: "80px",
-  } as CSS.Properties
+  } as CSS.Properties,
+  tableRoot: {
+    overflowX: "scroll"
+  } as CSS.Properties,
+  table: {
+    minWidth: "540px"
+  } as CSS.Properties,
+  input: {
+    width: "100%"
+  } as CSS.Properties,
 };
