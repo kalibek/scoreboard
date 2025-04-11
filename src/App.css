@@ -1,9 +1,11 @@
+html, body {
+    background-color: #0055ff;
+    color: #fff;
+}
 #root {
     max-width: 1280px;
     padding: 2rem;
     text-align: center;
-    background-color: #000;
-    color: #fff;
 }
 
 /*.logo {*/
@@ -43,6 +45,12 @@
 /*.read-the-docs {*/
 /*    color: #888;*/
 /*}*/
+
+table, tr, td {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #fff;
+}
 
 button {
     margin: 10px;

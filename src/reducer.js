@@ -6,7 +6,15 @@ const UNDO = "undo";
 const RESET_SCORE = "reset_score";
 
 
-function reducer(prevState, action) {
+function reducer(aState, action) {
+    const prevState = aState;
+    if (prevState.history !== null &&
+        prevState.history.history !== null &&
+        prevState.history.history.history !== null
+    ) {
+
+        prevState.history.history.history = null;
+    }
     switch (action.type) {
         case PLAYER1_NAME_SET:
             return {

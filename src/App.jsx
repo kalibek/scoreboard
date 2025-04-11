@@ -11,7 +11,8 @@ import {
 } from "./reducer.js";
 import {ScoreTable} from "./ScoreTable.jsx";
 
-const initState = {
+const initState = localStorage.getItem("state") === null ? {
+
     player1: "Player 1",
     player2: "Player 2",
     score1: 0,
@@ -19,10 +20,11 @@ const initState = {
     games1: 0,
     games2: 0,
     results: [],
-}
+} : JSON.parse(localStorage.getItem("state"));
 
 
 function App() {
+
 
     function handleKey(event) {
         switch (event.keyCode) {
@@ -58,6 +60,10 @@ function App() {
         games1, games2,
         results
     } = state;
+
+    useEffect(() => {
+        localStorage.setItem("state", JSON.stringify(state));
+    }, [state]);
 
     return (
         <>
